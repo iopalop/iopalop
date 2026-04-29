@@ -1,48 +1,44 @@
+// Modern architectural minimalism: white + glossy orange
 export const colors = {
-  background: "#F9F6F0",
+  background: "#FFFFFF",
   surface: "#FFFFFF",
-  primary: "#0F4C5C",
-  primaryDark: "#0A3540",
-  secondary: "#E3B23C",
-  secondaryDark: "#C99523",
-  accent: "#ED6A5A",
-  textPrimary: "#1A1A1A",
-  textSecondary: "#5C5C5C",
-  textMuted: "#8a8a8a",
-  border: "#E5E0D8",
-  success: "#2D8A5F",
-  danger: "#C84B31",
-  shadow: "rgba(15,76,92,0.12)",
+  surfaceAlt: "#FAFAFA",
+  primary: "#EA580C",
+  primaryDark: "#C2410C",
+  primaryGlow: "#FB923C",
+  secondary: "#1F1F1F",
+  secondaryDark: "#000000",
+  accent: "#EA580C",
+  textPrimary: "#0A0A0A",
+  textSecondary: "#525252",
+  textMuted: "#A3A3A3",
+  border: "#EAEAEA",
+  borderStrong: "#D4D4D4",
+  success: "#16A34A",
+  danger: "#DC2626",
+  shadow: "rgba(0,0,0,0.06)",
 };
 
-// Obtuse-angle border radius pattern
+// Modern subtle rounded corners — architectural clean lines
 export const obtuse = {
-  borderTopLeftRadius: 28,
-  borderBottomRightRadius: 28,
-  borderTopRightRadius: 6,
-  borderBottomLeftRadius: 6,
+  borderRadius: 16,
 };
 
 export const obtuseSmall = {
-  borderTopLeftRadius: 18,
-  borderBottomRightRadius: 18,
-  borderTopRightRadius: 4,
-  borderBottomLeftRadius: 4,
+  borderRadius: 10,
 };
 
 export const obtuseInverse = {
-  borderTopRightRadius: 28,
-  borderBottomLeftRadius: 28,
-  borderTopLeftRadius: 6,
-  borderBottomRightRadius: 6,
+  borderRadius: 16,
 };
 
+// Soft architectural shadow
 export const shadow = {
-  shadowColor: "#0F4C5C",
-  shadowOffset: { width: 0, height: 8 },
-  shadowOpacity: 0.1,
-  shadowRadius: 20,
-  elevation: 6,
+  shadowColor: "#000",
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.06,
+  shadowRadius: 16,
+  elevation: 3,
 };
 
 export const space = {

@@ -45,8 +45,8 @@ export default function CartScreen() {
   };
 
   const placeOrder = async () => {
-    if (!name || !phone || !address || !city) {
-      Alert.alert(t("error", lang), isAr ? "يرجى ملء جميع الحقول" : "Please fill all fields");
+    if (!phone || !address) {
+      Alert.alert(t("error", lang), isAr ? "يرجى إدخال رقم الهاتف والعنوان" : "Please enter phone & address");
       return;
     }
     setSubmitting(true);
@@ -132,12 +132,12 @@ export default function CartScreen() {
         <TopBar showBack title={t("checkout", lang)} />
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
           <ScrollView contentContainerStyle={{ padding: 16, gap: 12, paddingBottom: 100 }}>
-            <Field label={t("name", lang)} value={name} onChange={setName} testID="ck-name" />
-            <Field label={t("phone", lang)} value={phone} onChange={setPhone} keyboardType="phone-pad" testID="ck-phone" />
-            <Field label={t("address", lang)} value={address} onChange={setAddress} multiline testID="ck-address" />
-            <Field label={t("city", lang)} value={city} onChange={setCity} testID="ck-city" />
-            <Field label={t("country", lang)} value={country} onChange={setCountry} testID="ck-country" />
-            <Field label={t("notes", lang)} value={notes} onChange={setNotes} multiline testID="ck-notes" />
+            <Field label={t("name", lang) + (lang === "ar" ? " (اختياري)" : " (optional)")} value={name} onChange={setName} testID="ck-name" />
+            <Field label={t("phone", lang) + " *"} value={phone} onChange={setPhone} keyboardType="phone-pad" testID="ck-phone" />
+            <Field label={t("address", lang) + " *"} value={address} onChange={setAddress} multiline testID="ck-address" />
+            <Field label={t("city", lang) + (lang === "ar" ? " (اختياري)" : " (optional)")} value={city} onChange={setCity} testID="ck-city" />
+            <Field label={t("country", lang) + (lang === "ar" ? " (اختياري)" : " (optional)")} value={country} onChange={setCountry} testID="ck-country" />
+            <Field label={t("notes", lang) + (lang === "ar" ? " (اختياري)" : " (optional)")} value={notes} onChange={setNotes} multiline testID="ck-notes" />
 
             <View style={styles.summary}>
               <SumRow label={t("subtotal", lang)} val={`${subtotal.toLocaleString()} ${t("iqd", lang)}`} />

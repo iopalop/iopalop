@@ -97,6 +97,9 @@ export const T = {
   signInRequired: { ar: "يجب تسجيل الدخول", en: "Sign in required" },
   invalidCode: { ar: "كود غير صالح", en: "Invalid code" },
   newOrderAlert: { ar: "تنبيه طلب جديد", en: "New Order Alert" },
+  cheapest: { ar: "أرخص المنتجات", en: "Best Deals" },
+  trending: { ar: "العروض المميزة", en: "Trending Now" },
+  required: { ar: "مطلوب", en: "Required" },
 };
 
 export function t(key: keyof typeof T, lang: Lang): string {

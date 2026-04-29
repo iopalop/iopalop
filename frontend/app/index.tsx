@@ -7,6 +7,7 @@ import { useApp } from "../src/context";
 import { t } from "../src/i18n";
 import { colors, obtuse, obtuseSmall, shadow } from "../src/theme";
 import { TopBar, BottomNav } from "../src/components/Nav";
+import { ProductCarousel } from "../src/components/Carousel";
 import { api } from "../src/api";
 
 interface Category {
@@ -51,31 +52,30 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.safe} edges={["top"]}>
       <TopBar />
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Hero */}
-        <View style={[styles.hero, { flexDirection: isAr ? "row-reverse" : "row" }]} testID="hero-section">
-          <View style={{ flex: 1, gap: 8 }}>
-            <Text style={[styles.heroSmall, { textAlign: isAr ? "right" : "left" }]}>
-              {t("welcome", lang)}
-            </Text>
-            <Text style={[styles.heroTitle, { textAlign: isAr ? "right" : "left" }]}>عراقچي ستور</Text>
-            <Text style={[styles.heroSub, { textAlign: isAr ? "right" : "left" }]}>{t("tagline", lang)}</Text>
-            <View style={[styles.codBadge, { alignSelf: isAr ? "flex-end" : "flex-start" }]}>
-              <Ionicons name="cash-outline" size={14} color={colors.primaryDark} />
-              <Text style={styles.codBadgeText}>{t("cod", lang)}</Text>
-            </View>
-          </View>
-          <View style={styles.heroDecor}>
-            <View style={styles.diamond} />
-            <View style={[styles.diamond, { backgroundColor: colors.accent, marginTop: -8 }]} />
-            <View style={[styles.diamond, { backgroundColor: colors.primary }]} />
+        {/* Modern Architectural Hero */}
+        <View style={styles.hero} testID="hero-section">
+          <Text style={[styles.heroSmall, { textAlign: isAr ? "right" : "left" }]}>
+            {t("welcome", lang).toUpperCase()}
+          </Text>
+          <Text style={[styles.heroTitle, { textAlign: isAr ? "right" : "left" }]}>عراقچي ستور</Text>
+          <View style={styles.heroLine} />
+          <Text style={[styles.heroSub, { textAlign: isAr ? "right" : "left" }]}>{t("tagline", lang)}</Text>
+          <View style={[styles.codBadge, { alignSelf: isAr ? "flex-end" : "flex-start" }]}>
+            <Ionicons name="cash-outline" size={14} color={colors.primary} />
+            <Text style={styles.codBadgeText}>{t("cod", lang)}</Text>
           </View>
         </View>
 
-        {/* Shipping banner */}
+        {/* Shipping banner — minimal */}
         <View style={styles.shipBanner} testID="shipping-banner">
-          <Ionicons name="airplane-outline" size={18} color={colors.secondary} />
+          <Ionicons name="airplane-outline" size={16} color={colors.primary} />
           <Text style={styles.shipText}>{t("shippingTo", lang)}</Text>
         </View>
+
+        {/* Auto-rotating carousel - top deals */}
+        {!loading && products.length > 0 && (
+          <ProductCarousel products={products.slice(0, 6)} />
+        )}
 
         {/* Categories */}
         <Text style={[styles.sectionTitle, { textAlign: isAr ? "right" : "left" }]}>{t("shopByCategory", lang)}</Text>
@@ -92,6 +92,22 @@ export default function HomeScreen() {
             </TouchableOpacity>
           ))}
         </View>
+
+        {/* Cheapest products */}
+        {!loading && products.length > 0 && (
+          <>
+            <View style={[styles.sectionRow, { flexDirection: isAr ? "row-reverse" : "row", marginTop: 24 }]}>
+              <Ionicons name="pricetag" size={18} color={colors.danger} />
+              <Text style={[styles.sectionTitle, { marginBottom: 0 }]}>{t("cheapest", lang)}</Text>
+            </View>
+            <View style={styles.prodGrid}>
+              {[...products]
+                .sort((a, b) => a.price_iqd - b.price_iqd)
+                .slice(0, 4)
+                .map((p) => <ProductCard key={`cheap-${p.product_id}`} product={p} lang={lang} />)}
+            </View>
+          </>
+        )}
 
         {/* Featured products */}
         <Text style={[styles.sectionTitle, { textAlign: isAr ? "right" : "left", marginTop: 24 }]}>{t("featured", lang)}</Text>
@@ -143,88 +159,85 @@ const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.background },
   content: { padding: 16, paddingBottom: 24 },
   hero: {
-    ...obtuse,
-    backgroundColor: colors.primary,
-    padding: 22,
-    marginBottom: 18,
-    overflow: "hidden",
-    borderWidth: 2,
-    borderColor: colors.secondary,
-    alignItems: "center",
+    backgroundColor: colors.surfaceAlt,
+    padding: 28,
+    marginBottom: 16,
+    borderRadius: 20,
     gap: 10,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
-  heroSmall: { color: colors.secondary, fontSize: 12, letterSpacing: 1, fontWeight: "700" },
-  heroTitle: { color: "#fff", fontSize: 32, fontWeight: "900", letterSpacing: 0.5 },
-  heroSub: { color: "#E5E0D8", fontSize: 13, lineHeight: 18 },
+  heroSmall: { color: colors.primary, fontSize: 11, letterSpacing: 2.5, fontWeight: "700" },
+  heroTitle: { color: colors.textPrimary, fontSize: 38, fontWeight: "900", letterSpacing: -1, lineHeight: 44 },
+  heroLine: { width: 40, height: 3, backgroundColor: colors.primary, marginVertical: 6, borderRadius: 2 },
+  heroSub: { color: colors.textSecondary, fontSize: 13, lineHeight: 19, fontWeight: "500" },
   codBadge: {
-    backgroundColor: colors.secondary,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 6,
+    backgroundColor: "#FFF1E8",
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    borderRadius: 20,
     flexDirection: "row",
     alignItems: "center",
-    gap: 4,
-    marginTop: 4,
+    gap: 5,
+    marginTop: 8,
+    borderWidth: 1,
+    borderColor: "#FFD9C2",
   },
-  codBadgeText: { color: colors.primaryDark, fontWeight: "800", fontSize: 11 },
-  heroDecor: { width: 60, alignItems: "center", justifyContent: "center" },
-  diamond: {
-    width: 24,
-    height: 24,
-    backgroundColor: colors.secondary,
-    transform: [{ rotate: "45deg" }],
-    marginVertical: 4,
-  },
+  codBadgeText: { color: colors.primary, fontWeight: "700", fontSize: 11 },
+  heroDecor: { display: "none" },
+  diamond: { display: "none" },
   shipBanner: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,
     paddingHorizontal: 14,
     paddingVertical: 10,
-    backgroundColor: "#FFF8E8",
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1,
-    borderColor: colors.secondary,
-    ...obtuseSmall,
-    marginBottom: 16,
+    borderColor: colors.border,
+    borderRadius: 12,
+    marginBottom: 22,
   },
-  shipText: { color: colors.primaryDark, fontSize: 12, flex: 1, fontWeight: "600" },
+  shipText: { color: colors.textSecondary, fontSize: 12, flex: 1, fontWeight: "500" },
   sectionTitle: { fontSize: 18, fontWeight: "900", color: colors.primary, marginBottom: 12 },
+  sectionRow: { alignItems: "center", gap: 8, marginBottom: 12 },
   catGrid: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
   catCard: {
     width: "31%",
     aspectRatio: 1,
-    backgroundColor: colors.surface,
+    backgroundColor: colors.surfaceAlt,
     alignItems: "center",
     justifyContent: "center",
-    gap: 8,
+    gap: 10,
     borderWidth: 1,
     borderColor: colors.border,
     padding: 8,
+    borderRadius: 14,
   },
   catName: { fontSize: 11, fontWeight: "700", color: colors.textPrimary, textAlign: "center" },
   prodGrid: { flexDirection: "row", flexWrap: "wrap", gap: 12, justifyContent: "space-between" },
   prodCard: {
     width: "48%",
     backgroundColor: colors.surface,
-    ...obtuse,
+    borderRadius: 16,
     overflow: "hidden",
     borderWidth: 1,
     borderColor: colors.border,
   },
-  imgWrap: { width: "100%", aspectRatio: 1, backgroundColor: "#eee" },
+  imgWrap: { width: "100%", aspectRatio: 1, backgroundColor: colors.surfaceAlt },
   img: { width: "100%", height: "100%" },
   dropBadge: {
     position: "absolute",
     top: 8,
     left: 8,
-    backgroundColor: colors.accent,
+    backgroundColor: colors.primary,
     paddingHorizontal: 8,
     paddingVertical: 3,
-    borderRadius: 4,
+    borderRadius: 6,
   },
   dropBadgeText: { color: "#fff", fontSize: 9, fontWeight: "900" },
   prodName: { fontSize: 13, fontWeight: "700", color: colors.textPrimary, minHeight: 36 },
   priceRow: { alignItems: "baseline", gap: 4 },
   price: { fontSize: 16, fontWeight: "900", color: colors.primary },
-  iqd: { fontSize: 11, color: colors.textSecondary, fontWeight: "600" },
+  iqd: { fontSize: 11, color: colors.textMuted, fontWeight: "600" },
 });

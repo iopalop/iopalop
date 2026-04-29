@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useApp } from "../context";
 import { t } from "../i18n";
-import { colors, obtuse } from "../theme";
+import { colors } from "../theme";
 import { BrandLogo } from "./Brand";
 
 export function TopBar({ showBack = false, title }: { showBack?: boolean; title?: string }) {
@@ -15,7 +15,7 @@ export function TopBar({ showBack = false, title }: { showBack?: boolean; title?
       <View style={styles.row}>
         {showBack ? (
           <TouchableOpacity onPress={() => router.back()} style={styles.iconBtn} testID="back-btn">
-            <Ionicons name={lang === "ar" ? "chevron-forward" : "chevron-back"} size={24} color={colors.primary} />
+            <Ionicons name={lang === "ar" ? "chevron-forward" : "chevron-back"} size={22} color={colors.textPrimary} />
           </TouchableOpacity>
         ) : (
           <Pressable onPress={() => router.push("/")}><BrandLogo size="sm" /></Pressable>
@@ -29,7 +29,7 @@ export function TopBar({ showBack = false, title }: { showBack?: boolean; title?
           <Text style={styles.langText}>{lang === "ar" ? "EN" : "ع"}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => router.push("/cart")} style={styles.iconBtn} testID="cart-icon-btn">
-          <Ionicons name="bag-outline" size={24} color={colors.primary} />
+          <Ionicons name="bag-outline" size={22} color={colors.textPrimary} />
           {cartCount > 0 && (
             <View style={styles.badge}>
               <Text style={styles.badgeText}>{cartCount}</Text>
@@ -62,11 +62,12 @@ export function BottomNav() {
             onPress={() => router.push(it.key as any)}
             testID={it.testID}
           >
-            <Ionicons name={it.icon} size={22} color={active ? colors.primary : colors.textSecondary} />
+            <View style={[styles.bottomIconWrap, active && styles.bottomIconWrapActive]}>
+              <Ionicons name={it.icon} size={20} color={active ? "#fff" : colors.textSecondary} />
+            </View>
             <Text style={[styles.bottomLabel, active && { color: colors.primary, fontWeight: "700" }]}>
               {it.label}
             </Text>
-            {active && <View style={styles.bottomDot} />}
           </TouchableOpacity>
         );
       })}
@@ -76,57 +77,64 @@ export function BottomNav() {
 
 const styles = StyleSheet.create({
   topBar: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: colors.background,
+    paddingHorizontal: 18,
+    paddingVertical: 14,
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
   },
-  row: { flexDirection: "row", alignItems: "center", gap: 8 },
+  row: { flexDirection: "row", alignItems: "center", gap: 10 },
   iconBtn: {
-    padding: 8,
-    ...obtuse,
-    backgroundColor: colors.surface,
+    width: 40,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 12,
+    backgroundColor: colors.surfaceAlt,
     borderWidth: 1,
     borderColor: colors.border,
   },
   langBtn: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    ...obtuse,
-    backgroundColor: colors.secondary,
-    borderWidth: 1,
-    borderColor: colors.secondaryDark,
+    paddingHorizontal: 14,
+    paddingVertical: 9,
+    borderRadius: 12,
+    backgroundColor: colors.primary,
   },
-  langText: { fontWeight: "900", color: colors.primaryDark, fontSize: 13 },
-  title: { flex: 1, fontWeight: "900", fontSize: 18, color: colors.primary, textAlign: "center" },
+  langText: { fontWeight: "900", color: "#fff", fontSize: 12 },
+  title: { flex: 1, fontWeight: "900", fontSize: 17, color: colors.textPrimary, textAlign: "center", letterSpacing: -0.3 },
   badge: {
     position: "absolute",
-    top: 0,
-    right: 0,
+    top: -2,
+    right: -2,
     minWidth: 18,
     height: 18,
     borderRadius: 9,
-    backgroundColor: colors.accent,
+    backgroundColor: colors.primary,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 4,
+    borderWidth: 2,
+    borderColor: "#fff",
   },
-  badgeText: { color: "#fff", fontSize: 11, fontWeight: "900" },
+  badgeText: { color: "#fff", fontSize: 10, fontWeight: "900" },
   bottom: {
     flexDirection: "row",
     backgroundColor: colors.surface,
     borderTopWidth: 1,
     borderTopColor: colors.border,
-    paddingVertical: 8,
+    paddingTop: 8,
+    paddingBottom: 10,
   },
-  bottomItem: { flex: 1, alignItems: "center", paddingVertical: 6, gap: 3 },
-  bottomLabel: { fontSize: 11, color: colors.textSecondary },
-  bottomDot: {
-    width: 5,
-    height: 5,
-    borderRadius: 3,
-    backgroundColor: colors.secondary,
-    marginTop: 2,
+  bottomItem: { flex: 1, alignItems: "center", gap: 4 },
+  bottomIconWrap: {
+    width: 40,
+    height: 32,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 16,
   },
+  bottomIconWrapActive: {
+    backgroundColor: colors.primary,
+  },
+  bottomLabel: { fontSize: 10, color: colors.textMuted, fontWeight: "600" },
 });

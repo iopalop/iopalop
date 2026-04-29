@@ -92,11 +92,11 @@ class CartItem(BaseModel):
 
 class OrderIn(BaseModel):
     items: List[CartItem]
-    customer_name: str
+    customer_name: Optional[str] = ""
     customer_phone: str
     customer_address: str
-    customer_city: str
-    customer_country: str = "Iraq"
+    customer_city: Optional[str] = ""
+    customer_country: Optional[str] = "Iraq"
     notes: Optional[str] = None
     discount_code: Optional[str] = None
 
@@ -119,11 +119,11 @@ class Order(BaseModel):
     subtotal_iqd: float
     discount_iqd: float = 0
     total_iqd: float
-    customer_name: str
+    customer_name: Optional[str] = ""
     customer_phone: str
     customer_address: str
-    customer_city: str
-    customer_country: str
+    customer_city: Optional[str] = ""
+    customer_country: Optional[str] = "Iraq"
     notes: Optional[str] = None
     discount_code: Optional[str] = None
     payment_method: str = "cod"
