@@ -1,0 +1,91 @@
+{
+  "theme": "light",
+  "archetype": "Organic & Earthy",
+  "typography": {
+    "heading_font": "Readex Pro, sans-serif",
+    "body_font": "Outfit, sans-serif",
+    "arabic_support": true,
+    "scale": {
+      "h1": "text-4xl sm:text-5xl tracking-tight font-bold",
+      "h2": "text-2xl sm:text-3xl tracking-tight font-semibold",
+      "h3": "text-xl sm:text-2xl font-medium",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm tracking-wide"
+    }
+  },
+  "colors": {
+    "background": "#F9F6F0",
+    "surface": "#FFFFFF",
+    "primary": "#0F4C5C", 
+    "secondary": "#E3B23C", 
+    "accent": "#ED6A5A",
+    "text_primary": "#1A1A1A",
+    "text_secondary": "#5C5C5C",
+    "border": "#E5E0D8"
+  },
+  "layout": {
+    "spacing_scale": "Generous (p-4 to p-8)",
+    "container": "mobile-first responsive, typically max-w-md mx-auto for app feel on desktop, w-full on mobile.",
+    "borders": "Obtuse angle motifs via rounded-tl-[32px] rounded-br-[32px] rounded-tr-sm rounded-bl-sm to create geometric Iraqi-inspired shapes.",
+    "shadows": "Subtle, ambient shadows: shadow-[0_8px_30px_rgba(15,76,92,0.08)]",
+    "rtl_support": "Implement standard HTML dir='rtl' toggle. Mirror icons and layouts. Navigation and text alignment must respect RTL context."
+  },
+  "components": {
+    "cards": "Flat surfaces with subtle shadow, applying the obtuse angle border-radius. No generic standard rounded-lg.",
+    "buttons": "Primary buttons in Deep Teal (#0F4C5C) with Gold (#E3B23C) hover states or text accents. Use the obtuse border radius.",
+    "navigation": "Bottom tab navigation for mobile app feel. Sticky top header with Arabic/English toggle and Cart.",
+    "badges": "Cash on Delivery badge in Gold/Ochre. Stock depletion in Terracotta.",
+    "transitions": "Use framer-motion for smooth fade transitions between pages. initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}."
+  },
+  "media": {
+    "hero_backgrounds": [
+      {
+        "url": "https://images.unsplash.com/photo-1712419676831-c839a7d5de32?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwyfHxzYW5kJTIwZHVuZXMlMjBkZXNlcnQlMjBtaW5pbWFsfGVufDB8fHx8MTc3NzQ1MDkxOHww&ixlib=rb-4.1.0&q=85",
+        "category": "hero",
+        "description": "Sand dunes for minimalist Iraqi desert vibe background"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1616427758519-c8f639b64134?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwxfHxnb2xkJTIwZGVlcCUyMHRlYWwlMjB0ZXh0dXJlJTIwYWJzdHJhY3R8ZW58MHx8fHwxNzc3NDUwOTE4fDA&ixlib=rb-4.1.0&q=85",
+        "category": "texture",
+        "description": "Deep teal and gold abstract texture for accent headers or admin panel hero"
+      }
+    ],
+    "products": [
+      {
+        "url": "https://images.unsplash.com/photo-1544380935-17ce6a107313?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTF8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBtaW5pbWFsJTIwY2xvdGhpbmclMjBlbGVjdHJvbmljc3xlbnwwfHx8fDE3Nzc0NTA5MDd8MA&ixlib=rb-4.1.0&q=85",
+        "category": "electronics",
+        "description": "Google Mini smart speaker"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1593765947316-5945ff9b77bc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTF8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBtaW5pbWFsJTIwY2xvdGhpbmclMjBlbGVjdHJvbmljc3xlbnwwfHx8fDE3Nzc0NTA5MDd8MA&ixlib=rb-4.1.0&q=85",
+        "category": "clothing",
+        "description": "Shirt and iPhone"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1767851522865-40fdc830afc1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBraXRjaGVud2FyZSUyMHRveXMlMjBob21lJTIwZ29vZHN8ZW58MHx8fHwxNzc3NDUwOTA3fDA&ixlib=rb-4.1.0&q=85",
+        "category": "kitchenware",
+        "description": "Plates and persimmons"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1771355467801-4a4be5bbd8a9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBraXRjaGVud2FyZSUyMHRveXMlMjBob21lJTIwZ29vZHN8ZW58MHx8fHwxNzc3NDUwOTA3fDA&ixlib=rb-4.1.0&q=85",
+        "category": "toys",
+        "description": "Doll with umbrella"
+      },
+      {
+        "url": "https://images.pexels.com/photos/5531015/pexels-photo-5531015.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "category": "home goods",
+        "description": "Assorted homewares"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Build the application as a mobile-first PWA, utilizing a bottom tab navigation for the mobile app feel, since Expo/React Native is requested but the codebase uses ReactJS/Tailwind.",
+    "Implement an LTR/RTL toggle in the header that switches the HTML dir attribute and updates font families (Readex Pro for Arabic, Outfit for English).",
+    "Use Framer Motion for smooth fade transitions (<AnimatePresence mode='wait'> with opacity fades) on route changes.",
+    "Apply 'obtuse angle' styling using Tailwind's arbitrary border radii values (e.g., rounded-tl-[2rem] rounded-br-[2rem] rounded-tr-md rounded-bl-md) to all main cards, buttons, and featured images.",
+    "Highlight Cash on Delivery (COD) prominently in the checkout and product pages. Add a 'WhatsApp Order' button mapping to a wa.me link.",
+    "Ensure all interactive elements have data-testid attributes.",
+    "Build an admin panel accessible at a separate route with inventory tracking, stock depletion alerts, and Alibaba dropship link fields.",
+    "Create a bold logo/title treatment using 'عراقچي ستور' in the Readex Pro font with deep teal and gold accents."
+  ]
+}
